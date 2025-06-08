@@ -1,6 +1,6 @@
 package dto
 
-import userdomain "github.com/Axel791/auth/interanal/domains/user"
+import userdomain "github.com/Axel791/auth/internal/domains/user"
 
 type Claims struct {
 	UserID userdomain.UserID

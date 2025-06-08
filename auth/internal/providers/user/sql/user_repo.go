@@ -28,13 +28,10 @@ func (r *UserRepository) CreateUser(ctx context.Context, user userdomain.User) e
 	query, args, err := sq.StatementBuilder.
 		PlaceholderFormat(sq.Dollar).
 		Insert("users").
-		Columns("id", "email", "pwhash", "created_at", "disabled").
+		Columns("email", "pwhash").
 		Values(
-			user.ID().ToInt64(),
 			user.Email(),
 			user.PwHash(),
-			user.CreatedAt(),
-			user.Disabled(),
 		).
 		Suffix("RETURNING id").
 		ToSql()

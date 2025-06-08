@@ -26,6 +26,16 @@ func NewUser(
 	}
 }
 
+func NewCreateUser(
+	email string,
+	pwHash string,
+) User {
+	return User{
+		email:  email,
+		pwHash: pwHash,
+	}
+}
+
 func (u User) ID() UserID {
 	return u.id
 }
