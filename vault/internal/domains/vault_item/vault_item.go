@@ -5,6 +5,7 @@ import "time"
 type VaultItem struct {
 	id            VaultID
 	dataType      int64
+	groupId       GroupID
 	encryptedBlob []byte
 	createdAt     time.Time
 	updatedAt     time.Time
@@ -13,6 +14,7 @@ type VaultItem struct {
 func NewVaultItem(
 	id VaultID,
 	dataType int64,
+	groupId GroupID,
 	encryptedBlob []byte,
 	createdAt time.Time,
 	updatedAt time.Time,
@@ -20,6 +22,7 @@ func NewVaultItem(
 	return VaultItem{
 		id:            id,
 		dataType:      dataType,
+		groupId:       groupId,
 		encryptedBlob: encryptedBlob,
 		createdAt:     createdAt,
 		updatedAt:     updatedAt,
@@ -29,9 +32,11 @@ func NewVaultItem(
 func NewCreateVaultItem(
 	dataType int64,
 	encryptedBlob []byte,
+	groupId GroupID,
 ) VaultItem {
 	return VaultItem{
 		dataType:      dataType,
+		groupId:       groupId,
 		encryptedBlob: encryptedBlob,
 		createdAt:     time.Now(),
 	}
@@ -55,4 +60,8 @@ func (v VaultItem) CreatedAt() time.Time {
 
 func (v VaultItem) UpdatedAt() time.Time {
 	return v.updatedAt
+}
+
+func (v VaultItem) GroupID() GroupID {
+	return v.groupId
 }

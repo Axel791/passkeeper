@@ -14,3 +14,7 @@ func NewVaultID(value int64) (VaultID, error) {
 	}
 	return VaultID{value: value}, nil
 }
+
+func (v VaultID) ToInt64() int64 {
+	return v.value
+}
