@@ -3,6 +3,7 @@ package sql
 import (
 	"context"
 	"fmt"
+
 	groupdomain "github.com/Axel791/auth/internal/domains/group"
 	userdomain "github.com/Axel791/auth/internal/domains/user"
 	"github.com/Axel791/auth/internal/providers/group/sql/model"

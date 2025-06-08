@@ -13,6 +13,7 @@ type Config struct {
 	SecretKey      string `mapstructure:"SECRET_KEY"`
 	PasswordSecret string `mapstructure:"PASSWORD_SECRET"`
 	MigrationsPath string `mapstructure:"MIGRATIONS_PATH"`
+	GrpcNetwork    string `mapstructure:"GRPC_NETWORK"`
 }
 
 // LoadConfig - загрузка конфига проекта

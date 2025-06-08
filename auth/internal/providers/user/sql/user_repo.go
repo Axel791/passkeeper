@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+
 	"github.com/Axel791/auth/internal/providers/user/sql/model"
 	"github.com/Axel791/auth/internal/usecases/user/providers"
 	sq "github.com/Masterminds/squirrel"

@@ -2,8 +2,9 @@ package services
 
 import (
 	"fmt"
-	"github.com/Axel791/auth/internal/usecases/user/dto"
 	"time"
+
+	"github.com/Axel791/auth/internal/usecases/user/dto"
 
 	userdomain "github.com/Axel791/auth/internal/domains/user"
 	"github.com/golang-jwt/jwt/v4"

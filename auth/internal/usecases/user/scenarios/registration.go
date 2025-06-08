@@ -2,6 +2,7 @@ package scenarios
 
 import (
 	"context"
+
 	"github.com/Axel791/appkit"
 	userdomain "github.com/Axel791/auth/internal/domains/user"
 	"github.com/Axel791/auth/internal/services"

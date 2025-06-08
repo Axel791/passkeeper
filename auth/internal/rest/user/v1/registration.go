@@ -1,10 +1,11 @@
 package v1
 
 import (
+	"net/http"
+
 	"github.com/Axel791/appkit"
 	"github.com/Axel791/auth/internal/rest/user/v1/model"
 	"github.com/Axel791/auth/internal/usecases/user"
-	"net/http"
 )
 
 type Register struct {
