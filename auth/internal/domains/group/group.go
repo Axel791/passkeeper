@@ -2,11 +2,17 @@ package domains
 
 import "time"
 
+// Group представляет доменную сущность «группа»
+// Группа объединяет пользователей по какому-либо признаку или правам доступа
 type Group struct {
-	id          GroupID
-	name        string
+	// id — уникальный идентификатор группы
+	id GroupID
+	// name — название группы
+	name string
+	// description — описание или цель группы
 	description string
-	createdAt   time.Time
+	// createdAt — момент создания группы
+	createdAt time.Time
 }
 
 func NewGroup(

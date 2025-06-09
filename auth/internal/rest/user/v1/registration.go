@@ -8,16 +8,19 @@ import (
 	"github.com/Axel791/auth/internal/usecases/user"
 )
 
+// Register обрабатывает HTTP-запросы для регистрации нового пользователя
 type Register struct {
 	registration user.RegistrationUseCase
 }
 
+// NewRegister создаёт новый экземпляр Register с переданным сценарием регистрации
 func NewRegister(registration user.RegistrationUseCase) *Register {
 	return &Register{
 		registration: registration,
 	}
 }
 
+// ServeHTTP обрабатывает POST-запросы на /register
 func (h *Register) ServeHTTP(responseWriter http.ResponseWriter, request *http.Request) {
 	var requestModel model.RegistrationRequest
 	err := appkit.ReadFromBodyAndUnmarshalToModelJSON(request.Body, &requestModel)

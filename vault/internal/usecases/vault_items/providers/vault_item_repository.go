@@ -2,6 +2,7 @@ package providers
 
 import (
 	"context"
+
 	vaultdomain "github.com/Axel791/vault/internal/domains/vault_item"
 )
 

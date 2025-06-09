@@ -2,12 +2,19 @@ package domains
 
 import "time"
 
+// User представляет доменную сущность «пользователь»
+// Пользователь хранит данные для аутентификации и состояния учётной записи
 type User struct {
-	id        UserID
-	email     string
-	pwHash    string
+	// id — уникальный идентификатор пользователя
+	id UserID
+	// email — адрес электронной почты пользователя (логин)
+	email string
+	// pwHash — хеш пароля для проверки подлинности
+	pwHash string
+	// createdAt — момент создания учётной записи
 	createdAt time.Time
-	disabled  bool
+	// disabled — флаг, указывающий, заблокирована ли учётная запись
+	disabled bool
 }
 
 func NewUser(

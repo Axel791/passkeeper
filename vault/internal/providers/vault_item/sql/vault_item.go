@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+
 	"github.com/Axel791/vault/internal/providers/vault_item/sql/model"
 	sq "github.com/Masterminds/squirrel"
 	"github.com/jmoiron/sqlx"

@@ -3,6 +3,7 @@ package grpc
 import (
 	"context"
 	"fmt"
+
 	"github.com/Axel791/appkit"
 	"github.com/Axel791/passkeeper_grpc/pb"
 	groupdomain "github.com/Axel791/vault/internal/domains/group"
@@ -17,12 +18,18 @@ func NewAuthRepo(authClient pb.AuthServiceClient) *AuthRepo {
 	return &AuthRepo{authClient: authClient}
 }
 
-func (r *AuthRepo) ValidateToken(ctx context.Context, token string) error {
-	_, err := r.authClient.ValidateToken(ctx, &pb.ValidateTokenRequest{Token: token})
+func (r *AuthRepo) ValidateToken(ctx context.Context, token string) (userdomain.UserID, error) {
+	user, err := r.authClient.ValidateToken(ctx, &pb.ValidateTokenRequest{Token: token})
 	if err != nil {
-		return appkit.ForbiddenError("invalid token")
+		return userdomain.UserID{}, appkit.ForbiddenError("invalid token")
 	}
-	return nil
+
+	userID, err := userdomain.NewUserID(user.User.Id)
+	if err != nil {
+		return userdomain.UserID{}, appkit.ForbiddenError("invalid user id")
+	}
+
+	return userID, nil
 }
 
 func (r *AuthRepo) GetUserGroups(ctx context.Context, id userdomain.UserID) ([]groupdomain.Group, error) {

@@ -11,33 +11,32 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-type UpdateVaultItem struct {
+// CreateVaultItem - создает запись в хранилище
+type CreateVaultItem struct {
 	logger    *log.Logger
 	groupRepo providers.AuthGroupRetriever
 	vaultRepo providers.VaultItemRepository
 }
 
-func NewUpdateVaultItem(
+func NewCreateVaultItem(
 	logger *log.Logger,
 	groupRepo providers.AuthGroupRetriever,
 	vaultRepo providers.VaultItemRepository,
-) *UpdateVaultItem {
-	return &UpdateVaultItem{
+) *CreateVaultItem {
+	return &CreateVaultItem{
 		logger:    logger,
 		groupRepo: groupRepo,
 		vaultRepo: vaultRepo,
 	}
 }
 
-func (s *UpdateVaultItem) Execute(
+func (s *CreateVaultItem) Execute(
 	ctx context.Context,
 	userID userdomain.UserID,
-	data dto.VaultItemUpdateInput,
+	data dto.VaultItemInput,
 ) error {
 	groups, err := s.groupRepo.GetUserGroups(ctx, userID)
 	if err != nil {
-		s.logger.WithError(err).Error("failed to fetch groups")
-
 		return appkit.Wrap(appkit.Unknown, "error getting user groups", err)
 	}
 
@@ -52,18 +51,18 @@ func (s *UpdateVaultItem) Execute(
 		return appkit.ForbiddenError("user group not found")
 	}
 
-	item := vaultdomain.NewUpdateVaultItem(
-		data.VaultID,
+	item := vaultdomain.NewCreateVaultItem(
 		data.DataType,
 		data.EncryptedBlob,
 		data.GroupID,
 	)
 
-	if err = s.vaultRepo.UpdateVaultItem(ctx, item); err != nil {
-		s.logger.Printf("[vault] update error: %v", err)
-		return appkit.Wrap(appkit.Unknown, "error updating vault item: %w", err)
+	if err = s.vaultRepo.CreateVault(ctx, item); err != nil {
+		s.logger.WithError(err).Error("creating vault")
+
+		return appkit.Wrap(appkit.Unknown, "error creating vault: %w", err)
 	}
 
-	s.logger.Printf("[vault] item %d updated in group %d", item.ID().ToInt64(), item.GroupID().ToInt64())
+	s.logger.Printf("[vault] item %d created for group %d", item.ID().ToInt64(), item.GroupID().ToInt64())
 	return nil
 }

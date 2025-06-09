@@ -52,7 +52,7 @@ func main() {
 	providers := config.NewProviders(dbConn)
 	useCases := config.NewUseCases(log, providers, hashService, tokenService)
 
-	router.Route("/public/api/v1", func(r chi.Router) {
+	router.Route("/api/v1", func(r chi.Router) {
 		r.Method(
 			http.MethodPost,
 			"/users/registration",

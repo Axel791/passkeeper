@@ -2,6 +2,7 @@ package providers
 
 import (
 	"context"
+
 	groupdomain "github.com/Axel791/vault/internal/domains/group"
 	userdomain "github.com/Axel791/vault/internal/domains/user"
 )
