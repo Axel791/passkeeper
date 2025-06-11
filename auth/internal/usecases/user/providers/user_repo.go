@@ -3,6 +3,7 @@ package providers
 import (
 	"context"
 	"errors"
+
 	userdomain "github.com/Axel791/auth/internal/domains/user"
 )
 

@@ -3,6 +3,7 @@ package scenarios
 import (
 	"context"
 	"errors"
+
 	"github.com/Axel791/appkit"
 	"github.com/Axel791/auth/internal/services"
 	"github.com/Axel791/auth/internal/usecases/user/dto"

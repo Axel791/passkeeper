@@ -1,6 +1,6 @@
 package services
 
-import "github.com/Axel791/auth/interanal/usecases/user/dto"
+import "github.com/Axel791/auth/internal/usecases/user/dto"
 
 type HashPasswordService interface {
 	Hash(string) string

@@ -2,10 +2,11 @@ package services
 
 import (
 	"fmt"
-	"github.com/Axel791/auth/interanal/usecases/user/dto"
 	"time"
 
-	userdomain "github.com/Axel791/auth/interanal/domains/user"
+	"github.com/Axel791/auth/internal/usecases/user/dto"
+
+	userdomain "github.com/Axel791/auth/internal/domains/user"
 	"github.com/golang-jwt/jwt/v4"
 )
 
@@ -22,7 +23,7 @@ func NewTokenService(secretKey string) *TokenServiceHandler {
 // GenerateToken - генерация токена
 func (s *TokenServiceHandler) GenerateToken(claimsDTO dto.Claims) (string, error) {
 	claims := jwt.MapClaims{
-		"userID": claimsDTO.UserID.ToInt64(),
+		"userID": claimsDTO.UserID,
 		"login":  claimsDTO.Email,
 		"exp":    time.Now().Add(time.Hour * 72).Unix(),
 	}
